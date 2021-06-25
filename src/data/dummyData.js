@@ -1,7 +1,7 @@
 const dummyData = [
   {
     id: 1,
-    date: Date.now(),
+    date: new Date(),
     title: 'Heute ist ein schöner Tag',
     entryText:
       'Heute ist ein schöner Tag und ich habe keine Ahnung, was ich sonst noch schreiben soll',
@@ -9,7 +9,7 @@ const dummyData = [
   },
   {
     id: 2,
-    date: Date.now(),
+    date: new Date(),
     title: 'Heute ist ein sehr schöner Tag',
     entryText:
       'Heute ist ein sehr schöner Tag und ich habe keine Ahnung, was ich sonst noch schreiben soll',
@@ -17,7 +17,7 @@ const dummyData = [
   },
   {
     id: 3,
-    date: Date.now(),
+    date: new Date(),
     title: 'Heute ist kein sehr schöner Tag',
     entryText:
       'Heute ist kein sehr schöner Tag und ich habe absolut keine Ahnung, was ich sonst noch schreiben soll',

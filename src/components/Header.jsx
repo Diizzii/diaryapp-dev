@@ -10,14 +10,19 @@ const Header = () => {
       style={{ backgroundColor: '#ffffff' }}
     >
       <Container>
-        <NavLink exact={true} to='/' className='nav-link'>
+        <NavLink
+          exact={true}
+          to='/'
+          className='nav-link'
+          style={{ marginLeft: '0', paddingLeft: '0' }}
+        >
           <img
             src={logo}
             alt='diaryLogo'
             style={{ width: '50px', height: '50px' }}
           />
         </NavLink>
-        <Nav className='me-auto'>
+        <Nav className='me-auto' style={{ marginLeft: '3%' }}>
           <NavLink exact={true} to='/' className='nav-link'>
             All Entries
           </NavLink>
