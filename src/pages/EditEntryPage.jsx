@@ -1,10 +1,10 @@
 import React from 'react'
-import NavbarComp from '../components/NavbarComp'
+import Header from '../components/Header'
 
 const EditEntryPage = () => {
   return (
     <div>
-      <NavbarComp />
+      <Header />
       Edit Entry
     </div>
   )

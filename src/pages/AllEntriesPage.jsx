@@ -1,10 +1,10 @@
 import React from 'react'
-import NavbarComp from '../components/NavbarComp'
+import Header from '../components/Header'
 
 const AllEntriesPage = () => {
   return (
     <div>
-      <NavbarComp />
+      <Header />
       All Entries
     </div>
   )
