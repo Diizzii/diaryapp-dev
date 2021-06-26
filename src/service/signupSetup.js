@@ -1,5 +1,7 @@
 import * as Yup from 'yup'
 
+import { fb } from '../service/firebase'
+
 export const defaultValues = {
   email: '',
   userName: '',

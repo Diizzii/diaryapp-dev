@@ -4,7 +4,7 @@ import Signup from '../components/Signup'
 
 const SignupPage = () => {
   return (
-    <div>
+    <div className='custom-form' style={{ marginTop: '11%' }}>
       <Signup />
     </div>
   )

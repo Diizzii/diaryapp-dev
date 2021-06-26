@@ -1,0 +1,30 @@
+.custom-form {
+  margin: 0 auto;
+  max-width: 22%;
+  margin: 15% auto;
+  padding: 2%;
+  background: #e6f2ef;
+}
+
+.custom-field {
+  margin-bottom: 5%;
+}
+
+.custom-form h1 {
+  margin-bottom: 5%;
+}
+
+.custom-form button {
+  margin-top: 1%;
+  margin-bottom: 7%;
+}
+
+.custom-form span {
+  color: #5c81f2;
+  cursor: pointer;
+}
+
+.error {
+  font-weight: bolder;
+  color: #5c81f2;
+}
