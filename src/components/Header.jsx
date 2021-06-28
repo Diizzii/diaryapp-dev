@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
+
 import logo from '../images/diaryApp.png'
+import { fb } from '../service/firebase'
+import { AuthContext } from '../context/AuthContext'
 
 const Header = () => {
+  const [isAuth, setIsAuth, uid, setUid] = useContext(AuthContext)
+
+  const logoutHandler = () => {
+    fb.auth.signOut()
+    setIsAuth(false)
+    setUid('')
+  }
+
   return (
     <Navbar
       className='navbar navbar-expand-lg navbar-light'
@@ -30,7 +41,9 @@ const Header = () => {
             New Entry
           </NavLink>
         </Nav>
-        <Button className='btn btn-primary'>Logout</Button>
+        <Button className='btn btn-primary' onClick={logoutHandler}>
+          Logout
+        </Button>
       </Container>
     </Navbar>
   )

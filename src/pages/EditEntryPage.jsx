@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import Header from '../components/Header'
 import EditEntry from '../components/EditEntry'
+import { AuthContext } from '../context/AuthContext'
 
 const EditEntryPage = () => {
+  const [uid, setUid] = useContext(AuthContext)
+
+  if (!uid) return <Redirect to='/login' />
+
   return (
     <div>
       <Header />
