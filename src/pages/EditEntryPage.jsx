@@ -6,7 +6,7 @@ import EditEntry from '../components/EditEntry'
 import { AuthContext } from '../context/AuthContext'
 
 const EditEntryPage = () => {
-  const [uid, setUid] = useContext(AuthContext)
+  const { uid } = useContext(AuthContext)
 
   if (!uid) return <Redirect to='/login' />
 

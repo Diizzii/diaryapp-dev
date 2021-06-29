@@ -6,7 +6,7 @@ import InputEntry from '../components/NewEntry'
 import { AuthContext } from '../context/AuthContext'
 
 const NewEntryPage = () => {
-  const [uid, setUid] = useContext(AuthContext)
+  const { uid } = useContext(AuthContext)
 
   if (!uid) return <Redirect to='/' />
 

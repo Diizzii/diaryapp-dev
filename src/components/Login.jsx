@@ -10,7 +10,7 @@ import { AuthContext } from '../context/AuthContext'
 const Login = () => {
   const history = useHistory()
   const [serverError, setServerError] = useState('')
-  const [uid, setUid] = useContext(AuthContext)
+  const { setUid } = useContext(AuthContext)
 
   const login = ({ email, password }, { setSubmitting }) => {
     fb.auth

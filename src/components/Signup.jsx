@@ -10,7 +10,7 @@ import { AuthContext } from '../context/AuthContext'
 const Signup = () => {
   const history = useHistory()
   const [serverError, setServerError] = useState('')
-  const [isAuth, setIsAuth, uid, setUid] = useContext(AuthContext)
+  const { setUid } = useContext(AuthContext)
 
   const signup = ({ email, userName, password }, { setSubmitting }) => {
     fb.auth
@@ -21,7 +21,6 @@ const Signup = () => {
             .collection('diaryUsers')
             .doc(res.user.uid)
             .set({ userName })
-          setIsAuth(true)
           setUid(res.user.uid)
           history.push('/')
         } else {

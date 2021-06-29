@@ -1,10 +1,11 @@
-import React, { useHistory, useContext, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import { fb } from '../service/firebase.js'
 
 import { AuthContext } from '../context/AuthContext'
 
 const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
-  const [uid, setUid] = useContext(AuthContext)
+  const { uid } = useContext(AuthContext)
   const history = useHistory()
   const titleInputRef = useRef()
   const entryInputRef = useRef()
@@ -14,18 +15,20 @@ const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
     fb.firestore
       .collection('diaryEntries')
       .add({
-        date: new Date(),
         userId: uid,
-        entryText: entryInputRef.current.value,
+        date: new Date().toLocaleDateString(),
         title: titleInputRef.current.value,
+        entryText: entryInputRef.current.value,
       })
-      .then(() => console.log('Entry added to firestore'))
+      .then(() => {
+        console.log('Entry posted to firebase')
+        history.push('/')
+      })
       .catch((err) => console.error(err))
-      .finally(() => history.push('/'))
   }
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className='form-group'>
         <label htmlFor='title' className='mt-3 mb-2'>
           {titleLabel}
@@ -53,11 +56,15 @@ const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
         type='submit'
         className='btn btn-primary mt-3'
         style={{ marginRight: '1%' }}
-        onSubmit={submitHandler}
       >
         {submitButtonLabel}
       </button>
-      <button className='btn btn-secondary mt-3'>Cancel</button>
+      <button
+        className='btn btn-secondary mt-3'
+        onClick={() => history.push('/')}
+      >
+        Cancel
+      </button>
     </form>
   )
 }
