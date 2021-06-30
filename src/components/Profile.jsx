@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 
 import { defaultValues, validationSchema } from '../service/profileSetup'
 import { fb } from '../service/firebase'
 import FormField from './FormField'
+import { AuthContext } from '../context/AuthContext'
 
 const Profile = () => {
   const history = useHistory()
   const [resetSuccess, setResetSuccess] = useState(false)
   const [resetFail, setResetFail] = useState(false)
+  const { userName } = useContext(AuthContext)
 
   const updatePassword = ({ password }, { setSubmitting, resetForm }) => {
     setResetSuccess(false)
@@ -26,12 +28,17 @@ const Profile = () => {
 
   const cancelHandler = (event) => {
     event.preventDefault()
-    history.push('/')
+    history.push('/entries')
+  }
+
+  const deleteHandler = (event) => {
+    event.preventDefault()
+    history.push('/delete')
   }
 
   return (
     <div className='container'>
-      <h1>Want to update your password?</h1>
+      <h1>Want to update your password, {userName}?</h1>
       <Formik
         onSubmit={updatePassword}
         validateOnMount={true}
@@ -49,16 +56,24 @@ const Profile = () => {
             <button
               type='submit'
               disabled={!isValid || isSubmitting}
-              className='btn btn-primary'
+              className='btn btn-primary mt-2'
+              style={{ width: '99%' }}
             >
               Update Password
             </button>
             <button
               className='btn btn-secondary'
               onClick={cancelHandler}
-              style={{ marginLeft: '2%' }}
+              style={{ width: '99%' }}
             >
               Cancel
+            </button>
+            <button
+              className='btn btn-danger'
+              onClick={deleteHandler}
+              style={{ width: '99%' }}
+            >
+              Delete Account
             </button>
           </Form>
         )}

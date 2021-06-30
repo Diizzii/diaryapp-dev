@@ -10,7 +10,7 @@ import NoEntries from '../components/NoEntries'
 import Loading from '../components/Loading'
 
 const AllEntriesPage = () => {
-  const { uid, postNo, setPostNo } = useContext(AuthContext)
+  const { uid, postNo, setPostNo, setUserName } = useContext(AuthContext)
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -22,14 +22,13 @@ const AllEntriesPage = () => {
       .collection('diaryEntries')
       .doc(currentId)
       .delete()
-      .then(() => console.log('Entry deleted from Firebase'))
+      .then(() => setPostNo((postNo) => postNo - 1))
       .catch((err) => console.error(err))
-
-    if (posts.length === 0) setPostNo(0)
   }
 
   useEffect(() => {
     setIsLoading(true)
+
     const getPosts = () => {
       fb.firestore
         .collection('diaryEntries')
@@ -47,6 +46,21 @@ const AllEntriesPage = () => {
     }
     getPosts()
   }, [uid, setPostNo])
+
+  useEffect(() => {
+    const getUserName = () => {
+      fb.firestore
+        .collection('diaryUsers')
+        .doc(uid)
+        .get()
+        .then((res) => {
+          const uName = res.data().userName
+          setUserName(uName)
+        })
+        .catch((err) => console.error(err))
+    }
+    getUserName()
+  }, [uid, setUserName])
 
   if (!uid) return <Redirect to='/login' />
 

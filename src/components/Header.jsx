@@ -7,12 +7,14 @@ import { fb } from '../service/firebase'
 import { AuthContext } from '../context/AuthContext'
 
 const Header = () => {
-  const { setUid } = useContext(AuthContext)
+  const { setUid, userName, setPostNo, setUserName } = useContext(AuthContext)
   const history = useHistory()
 
   const logoutHandler = () => {
     fb.auth.signOut()
     setUid('')
+    setPostNo(0)
+    setUserName('')
     history.push('/login')
   }
 
@@ -28,7 +30,7 @@ const Header = () => {
       <Container>
         <NavLink
           exact={true}
-          to='/'
+          to='/entries'
           className='nav-link'
           style={{ marginLeft: '0', paddingLeft: '0' }}
         >
@@ -39,7 +41,7 @@ const Header = () => {
           />
         </NavLink>
         <Nav className='me-auto' style={{ marginLeft: '3%' }}>
-          <NavLink exact={true} to='/' className='nav-link'>
+          <NavLink exact={true} to='/entries' className='nav-link'>
             All Entries
           </NavLink>
           <NavLink to='/create' className='nav-link'>
@@ -47,7 +49,7 @@ const Header = () => {
           </NavLink>
         </Nav>
         <Button className='btn btn-profile' onClick={profileHandler}>
-          Profile
+          {userName}'s Profile
         </Button>
         <Button className='btn btn-primary' onClick={logoutHandler}>
           Logout

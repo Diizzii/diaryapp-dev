@@ -12,7 +12,10 @@ const Signup = () => {
   const [serverError, setServerError] = useState('')
   const { setUid } = useContext(AuthContext)
 
-  const signup = ({ email, userName, password }, { setSubmitting }) => {
+  const signup = (
+    { email, userName, password },
+    { setSubmitting, resetForm }
+  ) => {
     fb.auth
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
@@ -22,21 +25,22 @@ const Signup = () => {
             .doc(res.user.uid)
             .set({ userName })
           setUid(res.user.uid)
-          history.push('/')
+          history.push('/entries')
         } else {
           setServerError('Something went terribly wrong. Please try again!')
         }
       })
       .catch((err) => {
         if (err.code === 'auth/email-already-in-use') {
-          setServerError(
-            'Looks like you already have an account with us. Sign in instead?'
-          )
+          setServerError('Looks like you already have an account with us!')
         } else {
           setServerError('Something went terribly wrong. Please try again!')
         }
       })
-      .finally(() => setSubmitting(false))
+      .finally(() => {
+        resetForm({})
+        setSubmitting(false)
+      })
   }
 
   return (
@@ -67,13 +71,17 @@ const Signup = () => {
             </button>
             <div>
               Already have an account?{' '}
-              <span onClick={() => history.push('login')}>Log in here!</span>
+              <span onClick={() => history.push('/login')}>Log in here!</span>
             </div>
           </Form>
         )}
       </Formik>
 
-      {!!serverError && <div className='error'>{serverError}</div>}
+      {!!serverError && (
+        <div className='error' style={{ marginTop: '3%' }}>
+          {serverError}
+        </div>
+      )}
     </div>
   )
 }

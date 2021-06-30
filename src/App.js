@@ -12,6 +12,7 @@ import NewEntryPage from './pages/NewEntryPage'
 import EditEntryPage from './pages/EditEntryPage'
 import ProfilePage from './pages/ProfilePage'
 import ResetPage from './pages/ResetPage'
+import DeleteAccountPage from './pages/DeleteAccountPage.jsx'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -19,13 +20,15 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route path='/' exact component={AllEntriesPage} />
+          <Route path='/' exact component={LoginPage} />
+          <Route path='/entries' component={AllEntriesPage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/signup' component={SignupPage} />
           <Route path='/edit' component={EditEntryPage} />
           <Route path='/create' component={NewEntryPage} />
           <Route path='/profile' component={ProfilePage} />
           <Route path='/reset' component={ResetPage}></Route>
+          <Route path='/delete' component={DeleteAccountPage}></Route>
           <Redirect from='*' to='/' />
         </Switch>
       </Router>

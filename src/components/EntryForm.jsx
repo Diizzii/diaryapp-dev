@@ -5,7 +5,7 @@ import { fb } from '../service/firebase.js'
 import { AuthContext } from '../context/AuthContext'
 
 const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
-  const { uid } = useContext(AuthContext)
+  const { uid, setPostNo } = useContext(AuthContext)
   const history = useHistory()
   const titleInputRef = useRef()
   const entryInputRef = useRef()
@@ -22,8 +22,9 @@ const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
       })
       .then(() => {
         console.log('Entry posted to firebase')
-        history.push('/')
+        setPostNo((postNo) => postNo++)
       })
+      .then(() => history.push('/entries'))
       .catch((err) => console.error(err))
   }
 
@@ -61,7 +62,7 @@ const EntryForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
       </button>
       <button
         className='btn btn-secondary mt-3'
-        onClick={() => history.push('/')}
+        onClick={() => history.push('/entries')}
       >
         Cancel
       </button>

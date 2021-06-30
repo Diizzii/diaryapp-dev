@@ -24,7 +24,7 @@ const Reset = () => {
 
   return (
     <div className='container'>
-      <h1>Reset your password</h1>
+      <h1 className='mb-4'>Reset your password</h1>
       <Formik
         onSubmit={resetHandler}
         validateOnMount={true}
@@ -34,20 +34,22 @@ const Reset = () => {
         {({ isValid, isSubmitting }) => (
           <Form>
             <FormField name='email' label='Email' type='email' />
-            <button
-              type='submit'
-              disabled={!isValid || isSubmitting}
-              className='btn btn-primary'
-            >
-              Get reset email
-            </button>
-            <div>
-              Log in instead?{'  '}
-              <span onClick={() => history.push('/login')}>Click here!</span>
-            </div>
-            <div>
-              Sign up instead?{'  '}
-              <span onClick={() => history.push('/signup')}>Click here!</span>
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <button
+                type='submit'
+                disabled={!isValid || isSubmitting}
+                className='btn btn-primary'
+                style={{ width: '49%', marginRight: '1%' }}
+              >
+                New password
+              </button>
+              <button
+                className='btn btn-secondary'
+                style={{ width: '49%', marginLeft: '1%' }}
+                onClick={() => history.push('/login')}
+              >
+                Back to Login
+              </button>
             </div>
           </Form>
         )}

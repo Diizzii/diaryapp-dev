@@ -20,9 +20,9 @@ const Login = () => {
           setServerError("Your login didn't work. Please try again!")
         } else {
           setUid(res.user.uid)
-          history.push('/')
         }
       })
+      .then(() => history.push('/entries'))
       .catch((err) => {
         if (err.code === 'auth/wrong-password') {
           setServerError("That didn't work. Sure you used the right password?")
@@ -31,7 +31,7 @@ const Login = () => {
             'Sorry, that went wrong. Sure you have an account with us?'
           )
         } else {
-          setServerError('Something went wrong. Try again please!')
+          setServerError('That did not work. Try again please!')
         }
       })
       .finally(() => setSubmitting(false))
@@ -54,14 +54,15 @@ const Login = () => {
               type='submit'
               disabled={!isValid || isSubmitting}
               className='btn btn-primary'
+              style={{ width: '99%' }}
             >
               Login
             </button>
-            <div>
+            <div className='mt-3'>
               Don't have an account?{'  '}
               <span onClick={() => history.push('/signup')}>Sign up here!</span>
             </div>
-            <div>
+            <div className='mt-3'>
               Forgot your password?{'  '}
               <span onClick={() => history.push('/reset')}>Click here!</span>
             </div>
@@ -69,7 +70,11 @@ const Login = () => {
         )}
       </Formik>
 
-      {!!serverError && <div>{serverError}</div>}
+      {!!serverError && (
+        <div style={{ fontWeight: 'bold' }} className='mt-3'>
+          {serverError}
+        </div>
+      )}
     </div>
   )
 }

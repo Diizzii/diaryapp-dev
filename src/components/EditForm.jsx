@@ -43,7 +43,7 @@ const EditForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
       })
       .then(() => {
         console.log('Entry was updated!')
-        history.push('/')
+        history.push('/entries')
       })
       .catch((err) => console.error(err))
       .finally(() => setPostId(''))
@@ -85,7 +85,7 @@ const EditForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
       </button>
       <button
         className='btn btn-secondary mt-3'
-        onClick={() => history.push('/')}
+        onClick={() => history.push('/entries')}
       >
         Cancel
       </button>
