@@ -65,10 +65,9 @@ const Signup = () => {
             >
               Sign Up
             </button>
-            <div>Already have an account?</div>
-
             <div>
-              <span onClick={() => history.push('login')}>Log in instead!</span>
+              Already have an account?{' '}
+              <span onClick={() => history.push('login')}>Log in here!</span>
             </div>
           </Form>
         )}

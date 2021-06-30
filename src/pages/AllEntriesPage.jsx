@@ -6,9 +6,11 @@ import Header from '../components/Header'
 import Entry from '../components/Entry'
 import { AuthContext } from '../context/AuthContext'
 import { fb } from '../service/firebase'
+import NoEntries from '../components/NoEntries'
+import Loading from '../components/Loading'
 
 const AllEntriesPage = () => {
-  const { uid } = useContext(AuthContext)
+  const { uid, postNo, setPostNo } = useContext(AuthContext)
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -22,6 +24,8 @@ const AllEntriesPage = () => {
       .delete()
       .then(() => console.log('Entry deleted from Firebase'))
       .catch((err) => console.error(err))
+
+    if (posts.length === 0) setPostNo(0)
   }
 
   useEffect(() => {
@@ -36,22 +40,28 @@ const AllEntriesPage = () => {
             const entry = doc.data()
             const entryPlusId = { id: doc.id, ...entry }
             setPosts((prevState) => [...prevState, entryPlusId])
+            setPostNo((postNo) => postNo + 1)
           })
         })
       setIsLoading(false)
     }
     getPosts()
-  }, [uid])
+  }, [uid, setPostNo])
 
   if (!uid) return <Redirect to='/login' />
-  if (isLoading) return <div>Loading...</div>
+
   return (
     <div>
       <Header />
       <div className='container'>
-        {posts.map((post) => {
-          return <Entry key={post.id} {...post} deleteHandler={deleteHandler} />
-        })}
+        {isLoading && <Loading />}
+        {!isLoading && postNo === 0 && <NoEntries />}
+        {!isLoading &&
+          posts.map((post) => {
+            return (
+              <Entry key={post.id} {...post} deleteHandler={deleteHandler} />
+            )
+          })}
       </div>
     </div>
   )

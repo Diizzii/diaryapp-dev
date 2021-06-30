@@ -1,9 +1,16 @@
+body {
+  background-color: #e6f2ef;
+}
+
 .custom-form {
-  margin: 0 auto;
   max-width: 22%;
   margin: 15% auto;
   padding: 2%;
-  background: #e6f2ef;
+  background: white;
+}
+
+.with-header {
+  margin: 10% auto;
 }
 
 .custom-field {
@@ -27,4 +34,11 @@
 .error {
   font-weight: bolder;
   color: #5c81f2;
+}
+
+.btn-profile {
+  background: #e6f2ef;
+  margin-right: 1%;
+  border: none;
+  color: black;
 }

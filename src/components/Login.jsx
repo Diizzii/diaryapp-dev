@@ -57,12 +57,13 @@ const Login = () => {
             >
               Login
             </button>
-            <div>Don't have an account?</div>
-
             <div>
-              <span onClick={() => history.push('signup')}>
-                Sign up instead!
-              </span>
+              Don't have an account?{'  '}
+              <span onClick={() => history.push('/signup')}>Sign up here!</span>
+            </div>
+            <div>
+              Forgot your password?{'  '}
+              <span onClick={() => history.push('/reset')}>Click here!</span>
             </div>
           </Form>
         )}

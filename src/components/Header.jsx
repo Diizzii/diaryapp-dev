@@ -16,6 +16,10 @@ const Header = () => {
     history.push('/login')
   }
 
+  const profileHandler = () => {
+    history.push('/profile')
+  }
+
   return (
     <Navbar
       className='navbar navbar-expand-lg navbar-light'
@@ -42,6 +46,9 @@ const Header = () => {
             New Entry
           </NavLink>
         </Nav>
+        <Button className='btn btn-profile' onClick={profileHandler}>
+          Profile
+        </Button>
         <Button className='btn btn-primary' onClick={logoutHandler}>
           Logout
         </Button>
