@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { AuthContext } from '../context/AuthContext'
@@ -8,6 +8,11 @@ const DelecteAccount = () => {
   const { userName, setUserName, setPostNo, uid, setUid } =
     useContext(AuthContext)
   const history = useHistory()
+
+  useEffect(() => {
+    const uName = localStorage.getItem('userName')
+    setUserName(uName)
+  }, [setUserName])
 
   const deleteHandler = () => {
     fb.auth.currentUser
@@ -36,6 +41,7 @@ const DelecteAccount = () => {
     setUserName('')
     setPostNo(0)
     setUid('')
+    localStorage.removeItem('userName')
     history.push('/signup')
   }
 

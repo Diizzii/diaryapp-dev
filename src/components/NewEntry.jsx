@@ -1,10 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import EntryForm from './EntryForm'
 import { AuthContext } from '../context/AuthContext'
 
 const NewEntry = () => {
-  const { userName } = useContext(AuthContext)
+  const { userName, setUserName } = useContext(AuthContext)
+
+  useEffect(() => {
+    const uName = localStorage.getItem('userName')
+    setUserName(uName)
+  }, [setUserName])
 
   return (
     <>

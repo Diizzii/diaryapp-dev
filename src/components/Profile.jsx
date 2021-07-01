@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 
@@ -11,7 +11,12 @@ const Profile = () => {
   const history = useHistory()
   const [resetSuccess, setResetSuccess] = useState(false)
   const [resetFail, setResetFail] = useState(false)
-  const { userName } = useContext(AuthContext)
+  const { userName, setUserName } = useContext(AuthContext)
+
+  useEffect(() => {
+    const uName = localStorage.getItem('userName')
+    setUserName(uName)
+  }, [setUserName])
 
   const updatePassword = ({ password }, { setSubmitting, resetForm }) => {
     setResetSuccess(false)

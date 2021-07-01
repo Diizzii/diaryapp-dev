@@ -13,6 +13,8 @@ import EditEntryPage from './pages/EditEntryPage'
 import ProfilePage from './pages/ProfilePage'
 import ResetPage from './pages/ResetPage'
 import DeleteAccountPage from './pages/DeleteAccountPage.jsx'
+
+import PrivateRoute from './components/PrivateRoute'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -21,14 +23,14 @@ function App() {
       <Router>
         <Switch>
           <Route path='/' exact component={LoginPage} />
-          <Route path='/entries' component={AllEntriesPage} />
+          <PrivateRoute path='/entries' component={AllEntriesPage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/signup' component={SignupPage} />
-          <Route path='/edit' component={EditEntryPage} />
-          <Route path='/create' component={NewEntryPage} />
-          <Route path='/profile' component={ProfilePage} />
-          <Route path='/reset' component={ResetPage}></Route>
-          <Route path='/delete' component={DeleteAccountPage}></Route>
+          <PrivateRoute path='/edit' component={EditEntryPage} />
+          <PrivateRoute path='/create' component={NewEntryPage} />
+          <PrivateRoute path='/profile' component={ProfilePage} />
+          <Route path='/reset' component={ResetPage} />
+          <PrivateRoute path='/delete' component={DeleteAccountPage} />
           <Redirect from='*' to='/' />
         </Switch>
       </Router>

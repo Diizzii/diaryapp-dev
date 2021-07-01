@@ -9,7 +9,7 @@ import NoEntries from '../components/NoEntries'
 import Loading from '../components/Loading'
 
 const AllEntriesPage = () => {
-  const { uid, postNo, setPostNo, setUserName } = useContext(AuthContext)
+  const { uid, postNo, setPostNo } = useContext(AuthContext)
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -54,12 +54,12 @@ const AllEntriesPage = () => {
         .get()
         .then((res) => {
           const uName = res.data().userName
-          setUserName(uName)
+          localStorage.setItem('userName', uName)
         })
         .catch((err) => console.error(err))
     }
     getUserName()
-  }, [uid, setUserName])
+  }, [uid])
 
   return (
     <div>

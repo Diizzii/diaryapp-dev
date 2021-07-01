@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { NavLink, useHistory } from 'react-router-dom'
 
@@ -9,6 +9,11 @@ import { AuthContext } from '../context/AuthContext'
 const Header = () => {
   const { setUid, userName, setPostNo, setUserName } = useContext(AuthContext)
   const history = useHistory()
+
+  useEffect(() => {
+    const uName = localStorage.getItem('userName')
+    setUserName(uName)
+  }, [setUserName])
 
   const logoutHandler = () => {
     fb.auth.signOut()

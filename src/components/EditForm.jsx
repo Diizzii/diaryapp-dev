@@ -15,6 +15,12 @@ const EditForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
 
   useEffect(() => {
     setIsLoading(true)
+
+    if (!postId) {
+      history.push('/entries')
+      return
+    }
+
     fb.firestore
       .collection('diaryEntries')
       .doc(postId)
