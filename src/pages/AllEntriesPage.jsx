@@ -13,17 +13,23 @@ const AllEntriesPage = () => {
   const [posts, setPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const deleteHandler = (currentId) => {
-    const updatedPosts = posts.filter((post) => post.id !== currentId)
-    setPosts(updatedPosts)
+  useEffect(() => {
+    setIsLoading(true)
 
-    fb.firestore
-      .collection('diaryEntries')
-      .doc(currentId)
-      .delete()
-      .then(() => setPostNo((postNo) => postNo - 1))
-      .catch((err) => console.error(err))
-  }
+    const getUserName = () => {
+      fb.firestore
+        .collection('diaryUsers')
+        .doc(uid)
+        .get()
+        .then((res) => {
+          const uName = res.data().userName
+          localStorage.setItem('userName', uName)
+        })
+        .then(() => setIsLoading(false))
+        .catch((err) => console.error(err))
+    }
+    getUserName()
+  }, [uid])
 
   useEffect(() => {
     setIsLoading(true)
@@ -46,20 +52,17 @@ const AllEntriesPage = () => {
     getPosts()
   }, [uid, setPostNo])
 
-  useEffect(() => {
-    const getUserName = () => {
-      fb.firestore
-        .collection('diaryUsers')
-        .doc(uid)
-        .get()
-        .then((res) => {
-          const uName = res.data().userName
-          localStorage.setItem('userName', uName)
-        })
-        .catch((err) => console.error(err))
-    }
-    getUserName()
-  }, [uid])
+  const deleteHandler = (currentId) => {
+    const updatedPosts = posts.filter((post) => post.id !== currentId)
+    setPosts(updatedPosts)
+
+    fb.firestore
+      .collection('diaryEntries')
+      .doc(currentId)
+      .delete()
+      .then(() => setPostNo((postNo) => postNo - 1))
+      .catch((err) => console.error(err))
+  }
 
   return (
     <div>

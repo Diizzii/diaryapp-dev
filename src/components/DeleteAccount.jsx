@@ -35,14 +35,18 @@ const DelecteAccount = () => {
           batch.delete(doc.ref)
         })
         batch.commit()
+        console.log('Deleted entries')
       })
-      .then(() => console.log('Deleted entries'))
+      .then(() => {
+        setUserName('')
+        setPostNo(0)
+        setUid('')
+        localStorage.removeItem('userName')
+        setTimeout(() => {
+          history.push('/signup')
+        }, 1000)
+      })
       .catch((err) => console.error(err))
-    setUserName('')
-    setPostNo(0)
-    setUid('')
-    localStorage.removeItem('userName')
-    history.push('/signup')
   }
 
   return (

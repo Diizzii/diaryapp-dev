@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { NavLink, useHistory } from 'react-router-dom'
 
@@ -8,11 +8,17 @@ import { AuthContext } from '../context/AuthContext'
 
 const Header = () => {
   const { setUid, userName, setPostNo, setUserName } = useContext(AuthContext)
+  const [isLoading, setIsLoading] = useState(true)
   const history = useHistory()
 
   useEffect(() => {
-    const uName = localStorage.getItem('userName')
-    setUserName(uName)
+    const loadUserName = async () => {
+      setIsLoading(true)
+      const uName = await localStorage.getItem('userName')
+      setUserName(uName)
+      setIsLoading(false)
+    }
+    loadUserName()
   }, [setUserName])
 
   const logoutHandler = () => {
@@ -26,6 +32,8 @@ const Header = () => {
   const profileHandler = () => {
     history.push('/profile')
   }
+
+  if (isLoading) return <div> </div>
 
   return (
     <Navbar

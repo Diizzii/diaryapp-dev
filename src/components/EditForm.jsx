@@ -34,7 +34,7 @@ const EditForm = ({ titleLabel, entryTextLabel, submitButtonLabel }) => {
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false))
-  }, [postId])
+  }, [postId, history])
 
   const submitHandler = (event) => {
     event.preventDefault()

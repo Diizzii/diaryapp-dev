@@ -24,8 +24,8 @@ const Signup = () => {
             .collection('diaryUsers')
             .doc(res.user.uid)
             .set({ userName })
-          setUid(res.user.uid)
-          history.push('/entries')
+            .then(() => setUid(res.user.uid))
+            .then(() => history.push('/entries'))
         } else {
           setServerError('Something went terribly wrong. Please try again!')
         }
