@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
 
 import Header from '../components/Header'
 
@@ -61,8 +60,6 @@ const AllEntriesPage = () => {
     }
     getUserName()
   }, [uid, setUserName])
-
-  if (!uid) return <Redirect to='/login' />
 
   return (
     <div>

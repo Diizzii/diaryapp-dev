@@ -1,16 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik } from 'formik'
-
 import { defaultValues, validationSchema } from '../service/loginSetup'
 import { fb } from '../service/firebase'
 import FormField from './FormField'
-import { AuthContext } from '../context/AuthContext'
 
 const Login = () => {
   const history = useHistory()
   const [serverError, setServerError] = useState('')
-  const { setUid } = useContext(AuthContext)
 
   const login = ({ email, password }, { setSubmitting }) => {
     fb.auth
@@ -18,8 +15,6 @@ const Login = () => {
       .then((res) => {
         if (!res.user) {
           setServerError("Your login didn't work. Please try again!")
-        } else {
-          setUid(res.user.uid)
         }
       })
       .then(() => history.push('/entries'))
