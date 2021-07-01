@@ -10,6 +10,8 @@ const Login = () => {
   const [serverError, setServerError] = useState('')
 
   const login = ({ email, password }, { setSubmitting }) => {
+    if (localStorage.getItem('userName')) localStorage.removeItem('userName')
+
     fb.auth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {

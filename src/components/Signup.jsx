@@ -16,6 +16,8 @@ const Signup = () => {
     { email, userName, password },
     { setSubmitting, resetForm }
   ) => {
+    localStorage.setItem('userName', userName)
+
     fb.auth
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {

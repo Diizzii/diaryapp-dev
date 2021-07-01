@@ -9,6 +9,10 @@ body {
   background: white;
 }
 
+.custom-form input {
+  margin-top: 0.3rem;
+}
+
 .with-header {
   margin: 7% auto;
 }

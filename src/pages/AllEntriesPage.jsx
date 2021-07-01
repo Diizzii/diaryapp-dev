@@ -14,9 +14,8 @@ const AllEntriesPage = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true)
-
     const getUserName = () => {
+      setIsLoading(true)
       fb.firestore
         .collection('diaryUsers')
         .doc(uid)
@@ -28,11 +27,6 @@ const AllEntriesPage = () => {
         .then(() => setIsLoading(false))
         .catch((err) => console.error(err))
     }
-    getUserName()
-  }, [uid])
-
-  useEffect(() => {
-    setIsLoading(true)
 
     const getPosts = () => {
       fb.firestore
@@ -47,8 +41,9 @@ const AllEntriesPage = () => {
             setPostNo((postNo) => postNo + 1)
           })
         })
-      setIsLoading(false)
+        .then(() => setIsLoading(false))
     }
+    getUserName()
     getPosts()
   }, [uid, setPostNo])
 

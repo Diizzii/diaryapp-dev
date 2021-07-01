@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { NavLink, useHistory } from 'react-router-dom'
 
@@ -7,19 +7,9 @@ import { fb } from '../service/firebase'
 import { AuthContext } from '../context/AuthContext'
 
 const Header = () => {
-  const { setUid, userName, setPostNo, setUserName } = useContext(AuthContext)
-  const [isLoading, setIsLoading] = useState(true)
+  const { setUid, setPostNo, setUserName } = useContext(AuthContext)
+  const [isLoading] = useState(false)
   const history = useHistory()
-
-  useEffect(() => {
-    const loadUserName = async () => {
-      setIsLoading(true)
-      const uName = await localStorage.getItem('userName')
-      setUserName(uName)
-      setIsLoading(false)
-    }
-    loadUserName()
-  }, [setUserName])
 
   const logoutHandler = () => {
     fb.auth.signOut()
@@ -62,7 +52,7 @@ const Header = () => {
           </NavLink>
         </Nav>
         <Button className='btn btn-profile' onClick={profileHandler}>
-          {userName}'s Profile
+          {localStorage.getItem('userName')}'s Profile
         </Button>
         <Button className='btn btn-primary' onClick={logoutHandler}>
           Logout

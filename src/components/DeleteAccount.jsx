@@ -15,15 +15,11 @@ const DelecteAccount = () => {
   }, [setUserName])
 
   const deleteHandler = () => {
-    fb.auth.currentUser
-      .delete()
-      .then(() => console.log('Deleted user from auth'))
-      .catch((err) => console.error(err))
+    fb.auth.currentUser.delete().catch((err) => console.error(err))
     fb.firestore
       .collection('diaryUsers')
       .doc(uid)
       .delete()
-      .then(() => console.log('Username deleted'))
       .catch((err) => console.error(err))
     fb.firestore
       .collection('diaryEntries')
@@ -35,13 +31,14 @@ const DelecteAccount = () => {
           batch.delete(doc.ref)
         })
         batch.commit()
-        console.log('Deleted entries')
       })
       .then(() => {
         setUserName('')
         setPostNo(0)
         setUid('')
         localStorage.removeItem('userName')
+      })
+      .then(() => {
         setTimeout(() => {
           history.push('/signup')
         }, 1000)

@@ -22,7 +22,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route path='/' exact component={LoginPage} />
+          <Route path='/' exact component={SignupPage} />
           <PrivateRoute path='/entries' component={AllEntriesPage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/signup' component={SignupPage} />
