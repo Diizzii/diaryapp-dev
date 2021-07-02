@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Formik, Form } from 'formik'
 import { useHistory } from 'react-router-dom'
+import Recaptcha from 'react-recaptcha'
 
 import { defaultValues, validationSchema } from '../service/signupSetup'
 import { fb } from '../service/firebase'
@@ -10,7 +11,25 @@ import { AuthContext } from '../context/AuthContext'
 const Signup = () => {
   const history = useHistory()
   const [serverError, setServerError] = useState('')
+  const [siteKey] = useState(process.env.REACT_APP_RECAPTCHA_SITE_KEY)
+  const [isVerified, setIsVerified] = useState(false)
   const { setUid } = useContext(AuthContext)
+
+  const recaptchaLoaded = () => {
+    console.log('Recaptcha has loaded')
+    setIsVerified(false)
+  }
+
+  const verifyCallback = (res) => {
+    if (res) {
+      setIsVerified(true)
+    } else {
+      setServerError(
+        'Sorry, we cannot sign you up at this point. Please try again later!'
+      )
+    }
+    Formik.resetForm()
+  }
 
   const signup = (
     { email, userName, password },
@@ -46,7 +65,7 @@ const Signup = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container centered'>
       <h1>Sign up</h1>
       <Formik
         onSubmit={signup}
@@ -64,16 +83,26 @@ const Signup = () => {
               name='verifyPassword'
               label='Verify Password'
             />
+            <Recaptcha
+              sitekey={siteKey}
+              render='explicit'
+              className='recaptcha'
+              size='compact'
+              onloadCallback={recaptchaLoaded}
+              verifyCallback={verifyCallback}
+            />
             <button
-              disabled={isSubmitting || !isValid}
+              disabled={isSubmitting || !isValid || !isVerified}
               type='submit'
               className='btn btn-primary'
+              style={{ marginTop: '3%' }}
             >
               Sign Up
             </button>
+
             <div>
               Already have an account?{' '}
-              <span onClick={() => history.push('/login')}>Log in here!</span>
+              <span onClick={() => history.push('/login')}>Log in!</span>
             </div>
           </Form>
         )}

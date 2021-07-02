@@ -2,6 +2,7 @@ import React from 'react'
 
 import Header from '../components/Header'
 import InputEntry from '../components/NewEntry'
+import Footer from '../components/Footer'
 
 const NewEntryPage = () => {
   return (
@@ -10,6 +11,7 @@ const NewEntryPage = () => {
       <div className='container'>
         <InputEntry />
       </div>
+      <Footer />
     </div>
   )
 }

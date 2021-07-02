@@ -12,6 +12,7 @@ import NewEntryPage from './pages/NewEntryPage'
 import EditEntryPage from './pages/EditEntryPage'
 import ProfilePage from './pages/ProfilePage'
 import ResetPage from './pages/ResetPage'
+import FeedbackPage from './pages/FeedbackPage'
 import DeleteAccountPage from './pages/DeleteAccountPage.jsx'
 
 import PrivateRoute from './components/PrivateRoute'
@@ -31,6 +32,7 @@ function App() {
           <PrivateRoute path='/profile' component={ProfilePage} />
           <Route path='/reset' component={ResetPage} />
           <PrivateRoute path='/delete' component={DeleteAccountPage} />
+          <PrivateRoute path='/feedback' component={FeedbackPage} />
           <Redirect from='*' to='/' />
         </Switch>
       </Router>

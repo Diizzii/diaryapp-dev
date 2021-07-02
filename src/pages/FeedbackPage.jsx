@@ -1,19 +1,19 @@
 import React from 'react'
 
-import Profile from '../components/Profile'
+import Feedback from '../components/Feedback'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-const ProfilePage = () => {
+const FeedbackPage = () => {
   return (
     <>
       <Header />
-      <div className='custom-form with-header'>
-        <Profile />
+      <div className='container'>
+        <Feedback />
       </div>
       <Footer />
     </>
   )
 }
 
-export default ProfilePage
+export default FeedbackPage

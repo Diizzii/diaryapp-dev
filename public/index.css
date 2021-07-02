@@ -14,7 +14,7 @@ body {
 }
 
 .with-header {
-  margin: 7% auto;
+  margin: 5% auto;
 }
 
 .custom-field {
@@ -45,4 +45,33 @@ body {
   margin-right: 1%;
   border: none;
   color: black;
+}
+
+.feedback-form {
+  margin: 12% auto;
+  max-width: 50%;
+}
+
+.feedback-form h2 {
+  text-align: center;
+}
+
+.feedback-bottom {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.feedback-bottom span {
+  display: inline-block;
+  width: 2%;
+}
+
+.feedback-submitted {
+  margin-top: 5%;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.recaptcha {
+  margin: auto;
 }

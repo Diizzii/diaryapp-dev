@@ -7,6 +7,7 @@ import { AuthContext } from '../context/AuthContext'
 import { fb } from '../service/firebase'
 import NoEntries from '../components/NoEntries'
 import Loading from '../components/Loading'
+import Footer from '../components/Footer'
 
 const AllEntriesPage = () => {
   const { uid, postNo, setPostNo } = useContext(AuthContext)
@@ -72,6 +73,7 @@ const AllEntriesPage = () => {
             )
           })}
       </div>
+      <Footer />
     </div>
   )
 }
