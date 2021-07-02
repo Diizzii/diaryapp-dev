@@ -16,12 +16,12 @@ const Signup = () => {
   const { setUid } = useContext(AuthContext)
 
   const recaptchaLoaded = () => {
-    console.log('Recaptcha has loaded')
     setIsVerified(false)
   }
 
   const verifyCallback = (res) => {
     if (res) {
+      console.log(res)
       setIsVerified(true)
     } else {
       setServerError(
