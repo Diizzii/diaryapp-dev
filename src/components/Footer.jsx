@@ -10,11 +10,11 @@ const Footer = () => {
       style={{ background: 'white' }}
     >
       <div className='container' style={{ textAlign: 'center' }}>
-        &copy; diaryApp{' '}
+        &copy; <a href='https://2307.link'>2307.link</a>{' '}
         <span style={{ display: 'inline-block', width: '5%' }}> </span>
         <span
           onClick={() => history.push('/feedback')}
-          style={{ color: '#5c81f2', cursor: 'pointer' }}
+          style={{ color: '#3c9e8c', cursor: 'pointer' }}
         >
           Feedback
         </span>
