@@ -15,10 +15,10 @@ const Feedback = () => {
     setFeedbackSubmitted(true)
     emailjs
       .sendForm(
-        'service_a97sbrq',
-        'template_jf3h8av',
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
         event.target,
-        'user_9G7YEZ2n421jix6dIzLiQ'
+        process.env.REACT_APP_USER_ID
       )
       .then(() => (inputRef.current.value = ''))
       .catch((err) => console.error(err))
