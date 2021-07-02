@@ -1,6 +1,6 @@
-import { div } from 'prelude-ls'
 import React, { useRef, useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import emailjs from 'emailjs-com'
 
 import { AuthContext } from '../context/AuthContext'
 
@@ -12,12 +12,16 @@ const Feedback = () => {
 
   const submitHandler = (event) => {
     event.preventDefault()
-    const feedback = inputRef.current.value
-    if (feedback) {
-      setFeedbackSubmitted(true)
-      console.log(uid, feedback)
-      inputRef.current.value = ''
-    }
+    setFeedbackSubmitted(true)
+    emailjs
+      .sendForm(
+        'service_a97sbrq',
+        'template_jf3h8av',
+        event.target,
+        'user_9G7YEZ2n421jix6dIzLiQ'
+      )
+      .then(() => (inputRef.current.value = ''))
+      .catch((err) => console.error(err))
   }
 
   const cancelHandler = (event) => {
@@ -30,17 +34,18 @@ const Feedback = () => {
       <h2>
         What would like to let us know, {localStorage.getItem('userName')}?
       </h2>
-      <form action=''>
+
+      <form onSubmit={submitHandler}>
+        <input type='hidden' name='userId' value={uid} />
         <textarea
-          name=''
-          id=''
+          name='feedback'
           cols='30'
           rows='10'
           className='form-control'
           ref={inputRef}
         ></textarea>
         <div className='feedback-bottom'>
-          <button className='btn btn-primary' onClick={submitHandler}>
+          <button className='btn btn-primary' type='submit'>
             Submit
           </button>
           <span> </span>

@@ -12,40 +12,43 @@ import Footer from '../components/Footer'
 const AllEntriesPage = () => {
   const { uid, postNo, setPostNo } = useContext(AuthContext)
   const [posts, setPosts] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState()
 
   useEffect(() => {
-    const getUserName = () => {
-      setIsLoading(true)
-      fb.firestore
-        .collection('diaryUsers')
-        .doc(uid)
-        .get()
-        .then((res) => {
-          const uName = res.data().userName
-          localStorage.setItem('userName', uName)
-        })
-        .then(() => setIsLoading(false))
-        .catch((err) => console.error(err))
-    }
+    const abortController = new AbortController()
 
-    const getPosts = () => {
-      fb.firestore
-        .collection('diaryEntries')
-        .where('userId', '==', uid)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const entry = doc.data()
-            const entryPlusId = { id: doc.id, ...entry }
-            setPosts((prevState) => [...prevState, entryPlusId])
-            setPostNo((postNo) => postNo + 1)
-          })
-        })
-        .then(() => setIsLoading(false))
+    setIsLoading(true)
+    fb.firestore
+      .collection('diaryUsers')
+      .doc(uid)
+      .get()
+      .then((res) => {
+        const uName = res.data().userName
+        localStorage.setItem('userName', uName)
+      })
+      .then(() => setIsLoading(false))
+      .catch((err) => console.error(err))
+
+    return function cleanup() {
+      abortController.abort()
     }
-    getUserName()
-    getPosts()
+  }, [uid])
+
+  useEffect(() => {
+    fb.firestore
+      .collection('diaryEntries')
+      .where('userId', '==', uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const entry = doc.data()
+          const entryPlusId = { id: doc.id, ...entry }
+          setPosts((prevState) => [...prevState, entryPlusId])
+          setPostNo((postNo) => postNo + 1)
+        })
+      })
+      .then(() => setIsLoading(false))
+      .catch((err) => console.error(err))
   }, [uid, setPostNo])
 
   const deleteHandler = (currentId) => {

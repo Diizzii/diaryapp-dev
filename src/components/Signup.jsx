@@ -15,11 +15,7 @@ const Signup = () => {
   const [isVerified, setIsVerified] = useState(false)
   const { setUid } = useContext(AuthContext)
 
-  const recaptchaLoaded = () => {
-    setIsVerified(false)
-  }
-
-  const verifyCallback = (res) => {
+  const verifyCallback = function (res) {
     if (res) {
       setIsVerified(true)
     } else {
@@ -27,7 +23,6 @@ const Signup = () => {
         'Sorry, we cannot sign you up at this point. Please try again later!'
       )
     }
-    Formik.resetForm()
   }
 
   const signup = (
@@ -87,7 +82,6 @@ const Signup = () => {
               render='explicit'
               className='recaptcha'
               size='compact'
-              onloadCallback={recaptchaLoaded}
               verifyCallback={verifyCallback}
             />
             <button

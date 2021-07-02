@@ -9,6 +9,9 @@ const Login = () => {
   const history = useHistory()
   const [serverError, setServerError] = useState('')
 
+  const pushSignup = () => history.push('/signup')
+  const pushReset = () => history.push('/reset')
+
   const login = ({ email, password }, { setSubmitting }) => {
     if (localStorage.getItem('userName')) localStorage.removeItem('userName')
 
@@ -19,6 +22,7 @@ const Login = () => {
           setServerError("Your login didn't work. Please try again!")
         }
       })
+      .then(() => setSubmitting(false))
       .then(() => history.push('/entries'))
       .catch((err) => {
         if (err.code === 'auth/wrong-password') {
@@ -31,7 +35,6 @@ const Login = () => {
           setServerError('That did not work. Try again please!')
         }
       })
-      .finally(() => setSubmitting(false))
   }
 
   return (
@@ -57,11 +60,11 @@ const Login = () => {
             </button>
             <div className='mt-3'>
               Don't have an account?{'  '}
-              <span onClick={() => history.push('/signup')}>Sign up here!</span>
+              <span onClick={pushSignup}>Sign up here!</span>
             </div>
             <div className='mt-3'>
               Forgot your password?{'  '}
-              <span onClick={() => history.push('/reset')}>Click here!</span>
+              <span onClick={pushReset}>Click here!</span>
             </div>
           </Form>
         )}

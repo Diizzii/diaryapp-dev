@@ -9,7 +9,7 @@ const LoginPage = () => {
   if (uid) return <Redirect to='/entries' />
 
   return (
-    <div className='custom-form'>
+    <div className='custom-form' style={{ marginTop: '12%' }}>
       <Login />
     </div>
   )
