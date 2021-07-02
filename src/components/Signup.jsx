@@ -21,7 +21,6 @@ const Signup = () => {
 
   const verifyCallback = (res) => {
     if (res) {
-      console.log(res)
       setIsVerified(true)
     } else {
       setServerError(
