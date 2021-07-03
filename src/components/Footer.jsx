@@ -10,7 +10,7 @@ const Footer = () => {
       style={{ background: 'white' }}
     >
       <div className='container' style={{ textAlign: 'center' }}>
-        &copy; <a href='https://2307.link'>2307.link</a>{' '}
+        &copy; <a href='https://dkdev.link'>dkdev.link</a>{' '}
         <span style={{ display: 'inline-block', width: '5%' }}> </span>
         <span
           onClick={() => history.push('/feedback')}
