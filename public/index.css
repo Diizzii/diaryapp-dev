@@ -75,3 +75,24 @@ body {
 .recaptcha {
   margin: auto;
 }
+
+@media only screen and (max-width: 600px) {
+  .custom-form {
+    margin-top: 9%;
+    min-width: 85%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .custom-form {
+    margin-top: 9%;
+    min-width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .custom-form {
+    margin-top: 12%;
+    min-width: 45%;
+  }
+}
